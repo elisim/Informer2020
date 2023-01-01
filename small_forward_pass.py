@@ -90,7 +90,7 @@ def train(config: InformerConfig):
     # Change arguments
     args.train_epochs = 1
 
-    for ii in range(args.itr):
+    for ii in range(args.itr): # TODO REMOVE LOOP
         # set experiments
         exp = Exp(args)
 
@@ -121,7 +121,9 @@ def train(config: InformerConfig):
         print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
         exp.test(setting)
 
-        print("Out train")
+    print("Out train")
+    return setting
+
 
 
 def predict(setting, args):
@@ -183,11 +185,12 @@ def get_config():
          'use_multi_gpu': False}
 
     assert config.args == expected_config
-    return config.args
+    return config
 
 
 def main():
     config = get_config()
+    train(config)
 
 
 if __name__ == '__main__':
