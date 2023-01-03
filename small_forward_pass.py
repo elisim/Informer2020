@@ -89,6 +89,7 @@ def train(config: InformerConfig):
 
     # Change arguments
     args.train_epochs = 1
+    # args.data_path = 'ETTh1_one_row.csv'  # data file
 
     for ii in range(args.itr): # TODO REMOVE LOOP
         # set experiments
@@ -123,7 +124,6 @@ def train(config: InformerConfig):
 
     print("Out train")
     return setting
-
 
 
 def predict(setting, args):
