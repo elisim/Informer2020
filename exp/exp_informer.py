@@ -122,8 +122,11 @@ class Exp_Informer(Exp_Basic):
         self.model.train()
         return total_loss
 
-    def train(self, setting):
+    def train(self, setting, train_on_one_batch=True):
+        # Eli: train_data only used in process_one_batch to inverse the transformation
         train_data, train_loader = self._get_data(flag = 'train')
+        if train_on_one_batch:
+            train_loader = next(iter(train_loader))
         vali_data, vali_loader = self._get_data(flag = 'val')
         test_data, test_loader = self._get_data(flag = 'test')
 
@@ -137,7 +140,7 @@ class Exp_Informer(Exp_Basic):
         early_stopping = EarlyStopping(patience=self.args.patience, verbose=True)
         
         model_optim = self._select_optimizer()
-        criterion =  self._select_criterion()
+        criterion = self._select_criterion()
 
         if self.args.use_amp:
             scaler = torch.cuda.amp.GradScaler()
@@ -287,3 +290,7 @@ class Exp_Informer(Exp_Basic):
         batch_y = batch_y[:,-self.args.pred_len:,f_dim:].to(self.device)
 
         return outputs, batch_y
+
+    def train_on_one_batch(self, setting):
+        train_data, train_loader = self._get_data(flag='train')
+        one_batch = next(iter(train_loader))

@@ -116,7 +116,7 @@ def train(config: InformerConfig):
                                                                                     ii)
         # train
         print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
-        exp.train(setting)
+        exp.train(setting, train_on_one_batch=True)
 
         # test
         print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
@@ -190,14 +190,14 @@ def get_config():
 
 def main():
     config = get_config()
-    train(config)
+    setting = train(config)
+    print(setting)
 
 
 if __name__ == '__main__':
     print("Start main...")
     main()
     print("End main...")
-
 
 
 class Informer:
