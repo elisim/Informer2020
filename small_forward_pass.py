@@ -89,9 +89,10 @@ def train(config: InformerConfig):
 
     # Change arguments
     args.train_epochs = 1
+    args.itr = 1
     # args.data_path = 'ETTh1_one_row.csv'  # data file
 
-    for ii in range(args.itr): # TODO REMOVE LOOP
+    for ii in range(args.itr):  # TODO REMOVE LOOP
         # set experiments
         exp = Exp(args)
 
@@ -116,7 +117,7 @@ def train(config: InformerConfig):
                                                                                     ii)
         # train
         print('>>>>>>>start training : {}>>>>>>>>>>>>>>>>>>>>>>>>>>'.format(setting))
-        exp.train(setting, train_on_one_batch=True)
+        exp.train(setting)
 
         # test
         print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
