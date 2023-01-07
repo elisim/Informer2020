@@ -189,21 +189,22 @@ def get_config():
     return config
 
 
+def load_pretrained_checkpoint(args):
+    setting = "informer_ETTh1_ftM_sl96_ll48_pl24_dm512_nh8_el2_dl1_df2048_atprob_fc5_ebtimeF_dtTrue_mxTrue_exp_0"
+
+    exp = Exp(args=args)
+
+    return exp, setting
+
+
 def main():
     config = get_config()
-    setting = train(config)
-    print(setting)
+    # setting = train(config)
+    exp, setting = load_pretrained_checkpoint(config.args)
+    exp.predict(setting, True)
 
 
 if __name__ == '__main__':
     print("Start main...")
     main()
     print("End main...")
-
-
-class Informer:
-    def __init__(self, config: InformerConfig):
-        self.config = config
-
-    def __call__(self):
-        pass
