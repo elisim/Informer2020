@@ -256,7 +256,7 @@ class Exp_Informer(Exp_Basic):
         
         np.save(folder_path+'real_prediction.npy', preds)
         
-        return
+        return preds
 
     def _process_one_batch(self, dataset_object, batch_x, batch_y, batch_x_mark, batch_y_mark):
         batch_x = batch_x.float().to(self.device)

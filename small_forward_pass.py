@@ -127,17 +127,6 @@ def train(config: InformerConfig):
     return setting
 
 
-def predict(setting, args):
-    exp = Exp(args)
-
-    exp.predict(setting, True)
-    # the prediction will be saved in ./results/{setting}/real_prediction.npy
-
-    prediction = np.load('./results/' + setting + '/real_prediction.npy')
-
-    print(prediction.shape)
-
-
 def get_config():
     config = InformerConfig()
     expected_config = \
@@ -197,11 +186,21 @@ def load_pretrained_checkpoint(args):
     return exp, setting
 
 
+def load_last_prediction():
+    prediction = np.load('./results/' + 'last' + '/real_prediction.npy')
+    return prediction
+
+
 def main():
     config = get_config()
     # setting = train(config)
     exp, setting = load_pretrained_checkpoint(config.args)
-    exp.predict(setting, True)
+    last_preds = load_last_prediction()
+    # preds = exp.predict(setting, True)
+
+    x = 2
+
+    print(last_preds)
 
 
 if __name__ == '__main__':
